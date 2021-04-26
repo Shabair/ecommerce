@@ -1,9 +1,11 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+//layout
+import Layout from '../components/HorizontalLayout/Layout'
 
 const AppRoute = ({
 	component: Component,
-	layout: Layout,
+	pageTitle,
 	isAuthProtected,
 	...rest
 }) => (
@@ -11,14 +13,14 @@ const AppRoute = ({
 			{...rest}
 			render={props => {
 
-				if (isAuthProtected && !localStorage.getItem("authUser")) {
+				if (isAuthProtected /*&& !localStorage.getItem("authUser") */) {
 					return (
 						<Redirect to={{ pathname: "/login", state: { from: props.location } }} />
 					);
 				}
 
 				return (
-					<Layout>
+					<Layout pageTitle={pageTitle}>
 						<Component {...props} />
 					</Layout>
 				);
