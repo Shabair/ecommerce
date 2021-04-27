@@ -1,0 +1,28 @@
+@import '~antd/dist/antd.css';
+
+.logo {
+    float: left;
+    color:#fff;
+}
+
+ul.ant-menu.ant-menu-dark.ant-menu-root.ant-menu-horizontal {
+    float: right;
+}
+
+
+.site-layout-background {
+  background: #fff;
+}
+
+.contentStyle {
+  height: 400px;
+  color: #fff;
+  line-height: 400px;
+  text-align: center;
+  background: #364d79;
+}
+
+.content-container {
+  padding: 10px 50px;
+}
+
