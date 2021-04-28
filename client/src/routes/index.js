@@ -5,6 +5,8 @@ import { Redirect } from "react-router-dom";
 import Home from '../pages/Home'
 import Profile from '../pages/Profile'
 import About from '../pages/About'
+import Shop from '../pages/Ecommerce/Shop'
+import Signup from '../pages/Auth/Signup'
 
 
 const authProtectedRoutes = [
@@ -19,7 +21,10 @@ const authProtectedRoutes = [
 
 const publicRoutes = [
 	{ path: "/", exact: true, component: Home ,pageTitle:"Home"},
+	{ path: "/shop", exact: true, component: Shop ,pageTitle:"Shop"},
 	{ path: "/about", exact: true, component: About ,pageTitle:"About"},
+	{ path: "/signup", exact: true, component: Signup ,pageTitle:"Sign Up"},
+	
 	/*
 
 	{ path: "/pages-404", component: Error404 },

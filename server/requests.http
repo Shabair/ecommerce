@@ -1,0 +1,39 @@
+
+GET http://localhost:5000/signin HTTP/1.1
+
+###
+
+POST http://localhost:5000/signup HTTP/1.1
+content-type: application/json
+
+{
+    "username": "Shabair",
+    "email":"Shabai@gmail.com",
+    "phone":"1111111111111",
+    "password":"Pakistan",
+    "cpassword":"Pakistan"
+}
+
+###
+
+POST http://localhost:5000/signin HTTP/1.1
+content-type: application/json
+
+{
+    "email":"Shabair143@gmail.com",
+    "password":"Developer"
+}
+###
+DELETE  http://localhost:5000/users/607ef284e2b9f22db8ef263a HTTP/1.1
+###
+
+PUT http://localhost:5000/users HTTP/1.1
+content-type: application/json
+
+{
+    
+}
+
+###
+
+GET http://localhost:5000/profile HTTP/1.1

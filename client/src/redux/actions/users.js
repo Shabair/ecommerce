@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, SIGNIN } from '../constants/actionTypes';
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, SIGNIN, LOADING } from '../constants/actionTypes';
 
 import * as api from '../api/users.js';
 
@@ -14,9 +14,21 @@ export const getUsers = () => async (dispatch) => {
 
 export const createUser = (user) => async (dispatch) => {
   try {
+
+    dispatch(loadingUser());
+
     const { data } = await api.createUser(user);
 
     dispatch({ type: CREATE, payload: data });
+    dispatch(loadingUser());
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const loadingUser = () => {
+  try {
+    return { type: LOADING };
   } catch (error) {
     console.log(error.message);
   }
