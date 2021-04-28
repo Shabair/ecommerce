@@ -8,6 +8,7 @@ import About from '../pages/About'
 import Shop from '../pages/Ecommerce/Shop'
 import Signup from '../pages/Auth/Signup'
 import Login from '../pages/Auth/Login'
+import Dashboard from '../pages/Admin/Dashboard'
 
 
 const authProtectedRoutes = [
@@ -20,7 +21,18 @@ const authProtectedRoutes = [
 	
 ];
 
+const adminProtectedRoutes = [
+	/*
+
+	// this route should be at the end of all other routes
+	{ path: "/", exact: true, component: () => <Redirect to="/dashboard" /> }
+	*/
+	{ path: "/admin", exact:true ,component: Dashboard, pageTitle:"Dashboard" },
+	
+];
+
 const publicRoutes = [
+
 	{ path: "/", exact: true, component: Home ,pageTitle:"Home"},
 	{ path: "/shop", exact: true, component: Shop ,pageTitle:"Shop"},
 	{ path: "/about", exact: true, component: About ,pageTitle:"About"},
@@ -36,4 +48,4 @@ const publicRoutes = [
 	*/
 ];
 
-export { authProtectedRoutes, publicRoutes };
+export { authProtectedRoutes, publicRoutes, adminProtectedRoutes };

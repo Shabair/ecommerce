@@ -56,8 +56,14 @@ function Login() {
     }, [auth.loading])
 
     useEffect(()=>{
+
         if(auth.user.email){
-            history.push('/')
+            console.log(auth.user)
+            if(auth.user.role == 1){
+                history.push('/admin')
+            }else{
+                history.push('/')
+            }
         }
     },[auth.user]);
 

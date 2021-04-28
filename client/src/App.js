@@ -2,8 +2,9 @@ import './App.css';
 import { Switch, BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 // Import Routes
-import { authProtectedRoutes, publicRoutes } from "./routes/";
+import { adminProtectedRoutes, publicRoutes } from "./routes/";
 import Layout from './components/HorizontalLayout/Layout'
+import AdminLayout from './components/VerticalLayout/Layout'
 import NotFound from './pages/NotFound';
 import React,{useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -33,18 +34,17 @@ function App() {
             )
           })}
 
-          {authProtectedRoutes.map((route, idx) => {
+          {adminProtectedRoutes.map((route, idx) => {
             const Component = route.component
-            const isAuthProtected = true
             return (
-              (isAuthProtected) ?
+              (auth.user.role !== 1) ?
                 <Route exact path={route.path}>
                   <Redirect to="/login" />
                 </Route>
                 : <Route exact path={route.path}>
-                  <Layout pageTitle={route.pageTitle}>
+                  <AdminLayout pageTitle={route.pageTitle}>
                     <Component />
-                  </Layout>
+                  </AdminLayout>
                 </Route>
             )
           })} 
