@@ -10,9 +10,12 @@ import React,{useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {logout} from './redux/actions/auth'
 import {authenticate} from './redux/actions/auth'
+import Loading from './components/Common/Loading/Loading'
+
 function App() {
 
   const dispatch = useDispatch();
+  
   useEffect(()=>{
     dispatch(authenticate());
   },[]);
@@ -21,6 +24,8 @@ function App() {
   // console.log(auth)
   return (
     <>
+      <Loading />
+
       <Router>
         <Switch>
           {publicRoutes.map((route) => {

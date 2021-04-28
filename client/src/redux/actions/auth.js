@@ -4,8 +4,10 @@ import * as api from '../api/auth.js';
 
 export const authenticate = () => async (dispatch) => {
   try {
+    dispatch(loadingUser(true));
     const {data} = await api.authenticate();
-    console.log(data.data)
+    
+    dispatch(loadingUser(false));
     dispatch({ type: AUTHENTICATE, payload: data.data });
   } catch (error) {
     console.log(error.message);

@@ -18,8 +18,6 @@ function TopHeader() {
         <Header className="header" >
             <div className="logo" >Admin</div>
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[current]}  onClick={menuSelectHandler} selectedKeys={[current]} >
-                <Menu.Item key="dashboard"><NavLink exact to="/">Dashboard</NavLink></Menu.Item>
-                <Menu.Item key="products"><NavLink exact to="/products">Products</NavLink></Menu.Item>
                 
                 {
                     (!auth.user.role)?

@@ -8,7 +8,10 @@ import About from '../pages/About'
 import Shop from '../pages/Ecommerce/Shop'
 import Signup from '../pages/Auth/Signup'
 import Login from '../pages/Auth/Login'
+//admin
 import Dashboard from '../pages/Admin/Dashboard'
+import Products from '../pages/Admin/Products/ProductsList'
+import AddProduct from '../pages/Admin/Products/AddProduct'
 
 
 const authProtectedRoutes = [
@@ -28,6 +31,8 @@ const adminProtectedRoutes = [
 	{ path: "/", exact: true, component: () => <Redirect to="/dashboard" /> }
 	*/
 	{ path: "/admin", exact:true ,component: Dashboard, pageTitle:"Dashboard" },
+	{ path: "/products", exact:true ,component: Products, pageTitle:"Products List" },
+	{ path: "/product/add", exact:true ,component: AddProduct, pageTitle:"Add Product" },
 	
 ];
 
