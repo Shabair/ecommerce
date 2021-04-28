@@ -8,15 +8,16 @@ export const signin = async (req, res) => {
     var passwordCheck = '';
 
     try {
-        const { email, password } = req.body;
+        const { username, password } = req.body;
 
-        if (!email || !password) {
+        if (!username || !password) {
 
             return res.status(422).json({ status: false, error: `Please Enter Username or Password.` })
 
         }
 
-        const user = await UserModel.findOne({ email });
+        const user = await UserModel.findOne({ $or:[{email:username}, {username:username}] });
+        console.log(user)
         if (user)
             passwordCheck = bcrypt.compareSync(password, user.password)
 
@@ -31,7 +32,7 @@ export const signin = async (req, res) => {
             httpOnly: true
         });
 
-        res.send({status:true ,user:user});
+        res.send({status:true ,data:user});
 
     } catch (error) {
 
@@ -51,9 +52,9 @@ export const signin = async (req, res) => {
 export const signup = async (req, res) => {
 
     try {
-        const { username, email, phone, password, cpassword } = req.body;
+        const { username, email, fname, lname, phone, password, cpassword } = req.body;
 
-        if (!username || !email || !phone || !password || !cpassword) {
+        if (!username || !email || !fname ||!phone || !password || !cpassword) {
             return res.status(422).json({ error: "Plz Filled the fields properly" });
         }
 
@@ -68,7 +69,7 @@ export const signup = async (req, res) => {
             return res.status(422).json({ status: false, error: "Username Exist! Please Select a New One" });
         }
 
-        const user = new UserModel({ username, email, phone, password });
+        const user = new UserModel({ username, email, phone, password, fname, lname });
 
         const newUser = await user.save();
 
@@ -108,6 +109,36 @@ export const profile = async (req, res) => {
             status: false,
             error: `User Authentication Failed! with this error: ${error.message}`
 
+        });
+
+    }
+
+}
+
+export const logout = async (req, res) =>{
+    await res.clearCookie('jwt_token');
+    return res.status(200).json({ status: true, message: "Username Logged Out Successfully!" });
+}
+
+
+/**
+ * User Authenticate
+ */
+ export const authenticate = async (req, res) => {
+
+    try {
+
+        return res.status(200).json({
+            status:true ,
+            message: "User Logged In Successfuly.",
+            data: req.rootUser
+        });
+
+    } catch (error) {
+
+        res.status(401).json({
+            status: false,
+            error: `User Authentication Failed! with this error: ${error.message}`
         });
 
     }

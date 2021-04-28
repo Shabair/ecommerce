@@ -13,6 +13,17 @@ const authSchema = mongoose.Schema(
             maxlength: 50,
             unique: true,
         },
+        fname: {
+            type: String,
+            trim: true,
+            required: true,
+            maxlength: 50,
+        },
+        lname: {
+            type: String,
+            trim: true,
+            maxlength: 50,
+        },
         email: {
             type: String,
             trim: true,
@@ -20,7 +31,6 @@ const authSchema = mongoose.Schema(
             unique: true,
             maxlength: 50,
             lowercase:true
-
         },
         phone: {
             type: Number,
@@ -31,6 +41,14 @@ const authSchema = mongoose.Schema(
         password: {
             type: String,
             required: true
+        },
+        role:{
+            type:Number,
+            default:0
+        },
+        history:{
+            type:Array,
+            default:[]
         },
         tokens: [
             {
@@ -68,7 +86,11 @@ authSchema.methods.generateAuthToken = async function(){
         await this.save();
         return tokenGen;
     } catch (error) {
-        
+        res.status(500).json({
+            status: false,
+            error: `"User Login Failed!" with this error: ${error.message}`
+
+        });
     }
 }
 

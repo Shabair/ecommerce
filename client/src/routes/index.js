@@ -7,10 +7,11 @@ import Profile from '../pages/Profile'
 import About from '../pages/About'
 import Shop from '../pages/Ecommerce/Shop'
 import Signup from '../pages/Auth/Signup'
+import Login from '../pages/Auth/Login'
 
 
 const authProtectedRoutes = [
-/*
+	/*
 
 	// this route should be at the end of all other routes
 	{ path: "/", exact: true, component: () => <Redirect to="/dashboard" /> }
@@ -24,6 +25,8 @@ const publicRoutes = [
 	{ path: "/shop", exact: true, component: Shop ,pageTitle:"Shop"},
 	{ path: "/about", exact: true, component: About ,pageTitle:"About"},
 	{ path: "/signup", exact: true, component: Signup ,pageTitle:"Sign Up"},
+	{ path: "/login", exact: true, component: Login ,pageTitle:"Login In"},
+	// { path: "/logout", exact: true, component: ()=>{return <Redirect to="/" />} ,pageTitle:""},
 	
 	/*
 

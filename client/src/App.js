@@ -5,9 +5,19 @@ import { Switch, BrowserRouter as Router, Route, Redirect } from "react-router-d
 import { authProtectedRoutes, publicRoutes } from "./routes/";
 import Layout from './components/HorizontalLayout/Layout'
 import NotFound from './pages/NotFound';
-
-
+import React,{useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {logout} from './redux/actions/auth'
+import {authenticate} from './redux/actions/auth'
 function App() {
+
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(authenticate());
+  },[]);
+
+  const auth = useSelector((state)=>state.auth)
+  // console.log(auth)
   return (
     <>
       <Router>
@@ -37,7 +47,8 @@ function App() {
                   </Layout>
                 </Route>
             )
-          })}
+          })} 
+          <Route path="/logout" exact component={()=>{dispatch(logout()); return <Redirect to="/" />}} />
           <Route component={NotFound} />
         </Switch>
       </Router>

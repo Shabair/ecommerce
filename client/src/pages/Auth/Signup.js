@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createUser } from '../../redux/actions/users'
+import { createUser } from '../../redux/actions/auth'
 
 import Notification from '../../helpers/Loading'
 import { Form, Input, Button} from 'antd';
@@ -40,15 +40,15 @@ const tailFormItemLayout = {
 function Signup() {
     const [form] = Form.useForm();
     const dispatch = useDispatch();
-    const user = useSelector((state)=>state.users);
+    const auth = useSelector((state)=>state.auth);
 
     useEffect(() => {
-        if(user.loading){
+        if(auth.loading){
             Notification("User Registration","");
         }else{
             form.resetFields();
         }
-    }, [user.loading])
+    }, [auth.loading])
 
     const onFinish = (values) => {
         dispatch(createUser(values));
@@ -93,6 +93,32 @@ function Signup() {
                         {
                             required: true,
                             message: 'Please input your Username!',
+                            whitespace: true,
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    name="fname"
+                    label="First Name"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your First Name!',
+                            whitespace: true,
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                
+                <Form.Item
+                    name="lname"
+                    label="Last Name"
+                    rules={[
+                        {
                             whitespace: true,
                         },
                     ]}

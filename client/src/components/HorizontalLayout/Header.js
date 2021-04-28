@@ -1,10 +1,14 @@
 import { Layout, Menu, Badge } from 'antd';
 import React, {useState} from 'react'
+import { useSelector } from 'react-redux'
+
 import { ShoppingCartOutlined } from '@ant-design/icons';
-import { NavLink,Link } from 'react-router-dom'
-const { Header, Content, Footer } = Layout;
+import { NavLink } from 'react-router-dom'
+const { Header} = Layout;
 
 function TopHeader() {
+    const auth = useSelector((state)=>state.auth);
+
     const [current, setCurrent] = useState('home');
     const menuSelectHandler = (e) => {
         setCurrent(e.key);
@@ -13,10 +17,21 @@ function TopHeader() {
     return (
         <Header className="header" >
             <div className="logo" >Logo</div>
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['home']}  onClick={menuSelectHandler} selectedKeys={[current]} >
-                <Menu.Item key="home"><Link exact to="/">Home</Link></Menu.Item>
-                <Menu.Item key="shop"><Link exact to="/shop">Shop</Link></Menu.Item>
-                <Menu.Item key="signup"><Link exact to="/signup">Sign Up</Link></Menu.Item>
+            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[current]}  onClick={menuSelectHandler} selectedKeys={[current]} >
+                <Menu.Item key="home"><NavLink exact to="/">Home</NavLink></Menu.Item>
+                <Menu.Item key="shop"><NavLink exact to="/shop">Shop</NavLink></Menu.Item>
+                
+                {
+                    (!auth.user.email)?
+                    <>
+                    <Menu.Item key="signup"><NavLink exact to="/signup">Sign Up</NavLink></Menu.Item>
+                    <Menu.Item key="login"><NavLink exact to="/login">Login</NavLink></Menu.Item>
+                    </>:
+
+                    <Menu.Item key="logout"><NavLink exact to="/logout">Logout</NavLink></Menu.Item>
+                }
+                
+                
                 <Menu.Item key="4">
                     <Badge count={5}>
                         <a href="#" className="head-example" ><ShoppingCartOutlined /></a>

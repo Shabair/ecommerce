@@ -1,12 +1,12 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE, SIGNIN, LOADING } from '../constants/actionTypes';
+import { AUTHENTICATE, CREATE, UPDATE, DELETE, LIKE, SIGNIN, LOADING, LOGOUT } from '../constants/actionTypes';
 
-import * as api from '../api/users.js';
+import * as api from '../api/auth.js';
 
-export const getUsers = () => async (dispatch) => {
+export const authenticate = () => async (dispatch) => {
   try {
-    const { data } = await api.fetchUsers();
-
-    dispatch({ type: FETCH_ALL, payload: data });
+    const {data} = await api.authenticate();
+    console.log(data.data)
+    dispatch({ type: AUTHENTICATE, payload: data.data });
   } catch (error) {
     console.log(error.message);
   }
@@ -15,31 +15,50 @@ export const getUsers = () => async (dispatch) => {
 export const createUser = (user) => async (dispatch) => {
   try {
 
-    dispatch(loadingUser());
+    dispatch(loadingUser(true));
 
     const { data } = await api.createUser(user);
 
+    dispatch(loadingUser(false));
+    
     dispatch({ type: CREATE, payload: data });
-    dispatch(loadingUser());
   } catch (error) {
     console.log(error.message);
   }
 };
 
-export const loadingUser = () => {
+export const loadingUser = (val) => {
   try {
-    return { type: LOADING };
+    return { type: LOADING , payload:val};
   } catch (error) {
     console.log(error.message);
   }
 };
 
-export const signinUserReq = (user) => async (dispatch) => {
+export const login = (user) => async (dispatch) => {
   try {
-    const  data   = await api.signinUser(user);
 
-    dispatch({ type: SIGNIN, payload: data });
+    dispatch(loadingUser(true));
+    
+    const  result   = await api.signinUser(user);
+    
+    dispatch(loadingUser(false));
 
+    dispatch({ type: SIGNIN, payload: result.data.data });
+
+  } catch (error) {
+
+    console.log(error.message);
+
+  }
+};
+
+export const logout = () => async (dispatch) => {
+  try {
+    
+    const  data   = await api.logout();
+
+    dispatch({ type: LOGOUT});
   } catch (error) {
     console.log(error.message);
   }
