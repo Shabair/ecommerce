@@ -24,7 +24,7 @@ function App() {
   // console.log(auth)
   return (
     <>
-      <Loading />
+      {/* <Loading /> */}
 
       <Router>
         <Switch>

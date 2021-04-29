@@ -10,7 +10,7 @@ import morgan from 'morgan'
 import postRouter from './routers/posts.js'
 import aboutRouter from './routers/about.js'
 import authRouter from './routers/auth.js'
-
+import productsRouter from './routers/admin/products.js'
 const app = express();
 
 app.use(express.json());
@@ -57,6 +57,8 @@ app.use('/',authRouter);
 //single about
 app.use('/about',aboutRouter);
 
+//product
+app.use('/products',productsRouter)
 
 //single Home
 app.get('/',(req, res)=>{
