@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useDispatch } from 'react-redux'
 import { addProduct } from '../../../redux/actions/admin/products'
-import { Form, Input, Button, Upload, Card } from 'antd';
-import { UploadOutlined, InboxOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Card } from 'antd';
 import slugify from 'slugify'
 
 const formItemLayout = {

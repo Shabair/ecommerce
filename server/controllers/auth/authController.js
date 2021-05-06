@@ -1,5 +1,7 @@
 import UserModel from '../../models/authSchema.js'
 import bcrypt from 'bcrypt'
+import { validationResult } from 'express-validator'
+import xssFilters from 'xss-filters'
 
 /**
  * User Signin
@@ -52,6 +54,11 @@ export const signin = async (req, res) => {
 export const signup = async (req, res) => {
 
     try {
+        const errors = validationResult(req)
+        if (!errors.isEmpty()) {
+          return res.status(422).json({ errors: errors.array() })
+        }
+        
         const { username, email, fname, lname, phone, password, cpassword } = req.body;
 
         if (!username || !email || !fname ||!phone || !password || !cpassword) {
@@ -128,6 +135,10 @@ export const logout = async (req, res) =>{
 
     try {
 
+        // for(var i = 0; i<10000000000; i++){
+
+        // }
+
         return res.status(200).json({
             status:true ,
             message: "User Logged In Successfuly.",
@@ -143,4 +154,24 @@ export const logout = async (req, res) =>{
 
     }
 
+}
+
+/**
+ * Check is Unique Email
+ */
+export const checkIsEmailUnique = async (req, res)=>{
+
+    const email = xssFilters.inHTMLData(req.query.email);
+    const isEmailUnique = await UserModel.find({email:email});
+    if(isEmailUnique.length === 0 ){
+        return res.status(200).json({
+            status:true ,
+            message: `Email is Unique`
+        });
+    }else{
+        return res.status(401).json({
+            status: false,
+            error: `Email Is Not Unique! Please Select another`
+        });
+    }
 }

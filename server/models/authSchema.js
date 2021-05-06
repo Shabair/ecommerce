@@ -32,6 +32,12 @@ const authSchema = mongoose.Schema(
             maxlength: 50,
             lowercase:true
         },
+        age:{
+            type:Number,
+            get: v => Math.round(v),
+            set: v => Math.round(v),
+            alias: 'a'
+        },
         phone: {
             type: Number,
             trim: true,
@@ -43,8 +49,10 @@ const authSchema = mongoose.Schema(
             required: true
         },
         role:{
-            type:Number,
-            default:0
+            type:String,
+            default:'ADMIN-HDB8WBD' 
+            // ADMIN-HDB8WBD for admin
+            // USER-OPCBD6F for user
         },
         history:{
             type:Array,

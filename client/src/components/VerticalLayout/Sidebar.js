@@ -2,7 +2,7 @@ import { Layout, Menu } from 'antd';
 import { UploadOutlined, DashboardOutlined, ShoppingOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom'
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Sider } = Layout;
 const { SubMenu } = Menu;
 function Sidebar() {
     return (

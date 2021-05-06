@@ -40,11 +40,29 @@ GET http://localhost:5000/profile HTTP/1.1
 
 
 ###
-POST http://localhost:5000/products/add HTTP/1.1
+POST http://localhost:5000/products HTTP/1.1
 content-type: application/json
 
 {
-    "title": "Product One",
-    "slug":"product-one-sxaa",
+    "title": "Product 5",
+    "slug":"product-5",
+    "content":"1111111111111"
+}
+
+###
+GET http://localhost:5000/products HTTP/1.1
+
+###
+###
+
+GET http://localhost:5000/posts HTTP/1.1
+
+###
+POST http://localhost:5000/posts HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Post 1",
+    "slug":"post-1",
     "description":"1111111111111"
 }

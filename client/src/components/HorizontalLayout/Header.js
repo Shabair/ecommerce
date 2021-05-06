@@ -25,16 +25,15 @@ function TopHeader() {
                     (!auth.user.email)?
                     <>
                     <Menu.Item key="signup"><NavLink exact to="/signup">Sign Up</NavLink></Menu.Item>
-                    <Menu.Item key="login"><NavLink exact to="/login">Login</NavLink></Menu.Item>
+                    <Menu.Item key="signin"><NavLink exact to="/signin">Signin</NavLink></Menu.Item>
                     </>:
 
                     <Menu.Item key="logout"><NavLink exact to="/logout">Logout</NavLink></Menu.Item>
                 }
                 
-                
                 <Menu.Item key="4">
                     <Badge count={5}>
-                        <a href="#" className="head-example" ><ShoppingCartOutlined /></a>
+                        <a href="https://www.google.com/" className="head-example" ><ShoppingCartOutlined /></a>
                     </Badge>
                 </Menu.Item>
             </Menu>

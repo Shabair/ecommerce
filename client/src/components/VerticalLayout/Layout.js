@@ -5,7 +5,7 @@ import Sidebar from './Sidebar'
 import Footer from './Footer'
 import { Layout } from 'antd';
 
-const { Content, Sider } = Layout;
+const { Content} = Layout;
 const MainLayout = ({ pageTitle, children }) => {
     return (
         <>

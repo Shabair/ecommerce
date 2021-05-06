@@ -1,13 +1,20 @@
 import express from 'express'
-import {addProduct} from '../../controllers/admin/products.js'
-import {authentication} from '../../middlewares/authentication.js'
 
+import * as api from '../../controllers/admin/products.js'
+import {authentication} from '../../middlewares/authentication.js'
+import {checkProduct} from '../../middlewares/product.js'
 const Router = express.Router();
 
 /**
- * Post request at http:localhost:5000/signin
+ * Post request at http:localhost:5000/products
  */
-Router.post('/add', authentication, addProduct);
+Router.post('/', authentication, checkProduct(), api.addProduct);
+
+
+/**
+ * Get request at http:localhost:5000/products
+ */
+Router.get('/', authentication, api.getAllProducts);
 
 
 /**

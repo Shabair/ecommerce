@@ -1,10 +1,29 @@
 import mongoose from 'mongoose'
 
 const postSchema = mongoose.Schema({
-
-    title:String,
-    message:String,
-    creator:String,
+    title: {
+        type: String,
+        trim: true,
+        min: 3,
+        max: 160,
+        required: true
+    },
+    slug: {
+        type: String,
+        unique: true,
+        index: true,
+        lowercase: true
+    },
+    content: {
+        type: {},
+        required: true,
+        min: 20,
+        max: 2000000
+    },
+    user: {
+        type: String,
+        default: 'Admin'
+    },
     tags:[String],
     selectedFile:String,
     likeCount:{
@@ -19,6 +38,6 @@ const postSchema = mongoose.Schema({
 });
 
 
-const postModel = mongoose.model('posts',postSchema);
+const postModel = mongoose.model('post',postSchema);
 
 export default postModel;

@@ -19,8 +19,8 @@ export const getPosts = (req, res) =>{
 /**
  * Create Post
  */
-export const createPost = () =>{
-
+export const createPost = (req, res) =>{
+    
 }
 
 

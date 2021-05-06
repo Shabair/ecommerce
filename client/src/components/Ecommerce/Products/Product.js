@@ -10,8 +10,8 @@ function Product() {
             cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
 
             actions={[
-                <a href="#"><ShoppingCartOutlined key="cart" /></a>,
-                <a href="#"><EyeOutlined key="view" /></a>
+                <a href="https://www.google.com/"><ShoppingCartOutlined key="cart" /></a>,
+                <a href="https://www.google.com/"><EyeOutlined key="view" /></a>
             ]}
         >
             <Meta title="Europe Street beat" description="www.instagram.com" />

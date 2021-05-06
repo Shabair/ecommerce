@@ -1,5 +1,3 @@
-import { Layout } from 'antd';
-const { Sider } = Layout;
 
 function Sidebar() {
     return (

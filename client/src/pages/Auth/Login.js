@@ -44,16 +44,15 @@ function Login() {
     
     let history = useHistory();
 
-    useEffect(() => {
-        if(auth.loading){
-            Notification("User Login In Process","");
-        }else{
-            form.resetFields();
+    // useEffect(() => {
+    //     if(auth.loading){
+    //         Notification("User Login In Process","");
+    //     }else{
+    //         form.resetFields();
             
-        }
-        
+    //     }
 
-    }, [auth.loading])
+    // }, [auth.loading])
 
     useEffect(()=>{
 

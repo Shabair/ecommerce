@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react'
+import React from 'react'
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,18 +16,11 @@ function Loading() {
 
     const classes = useStyles();
 
-    const auth = useSelector((state) => state.auth);
+    const auth = useSelector((state) => state.auth.loading);
 
-    const [open, setOpen] = useState(true);
-
-    useEffect(() => {
-        setOpen(auth.loading)
-    }, [auth.loading])
-
-    console.log("in the loading");
     return (
         <>
-            <Backdrop className={classes.backdrop} open={open}>
+            <Backdrop className={classes.backdrop} open={auth}>
                 <CircularProgress color="inherit" />
             </Backdrop>
         </>
