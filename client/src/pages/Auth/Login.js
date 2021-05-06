@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../redux/actions/auth'
 import { useHistory  } from "react-router-dom";
-import Notification from '../../helpers/Loading'
+import Notification from '../../helpers/Notifications'
 import { Form, Input, Button} from 'antd';
 import { Card } from 'antd';
 

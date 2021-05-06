@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,11 +16,23 @@ function Loading() {
 
     const classes = useStyles();
 
-    const auth = useSelector((state) => state.auth.loading);
+    let loggedInUser = useSelector((state) => state.auth.loggedInUser);
+    
+    const createUser = useSelector((state) => state.auth.createUser);
 
+    const [loadingAction, setLoadingAction] = useState(loggedInUser.loading);
+
+    useEffect(() => {
+        setLoadingAction(createUser.loading);
+    }, [createUser.loading])
+
+    useEffect(() => {
+        setLoadingAction(loggedInUser.loading);
+    }, [loggedInUser.loading])
+    
     return (
         <>
-            <Backdrop className={classes.backdrop} open={auth}>
+            <Backdrop className={classes.backdrop} open={loadingAction}>
                 <CircularProgress color="inherit" />
             </Backdrop>
         </>

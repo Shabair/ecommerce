@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createUser } from '../../redux/actions/auth'
-
+import { useHistory  } from "react-router-dom";
 import { isUniqueEmail } from '../../helpers/index'
 
-import Notification from '../../helpers/Loading'
+import Notification,{ErrorNotification} from '../../helpers/Notifications'
 import { Form, Input, Button, Select } from 'antd';
 import { Card } from 'antd';
 
@@ -52,45 +52,50 @@ const initialFieldsValues = {
 }
 
 function Signup() {
+    let history = useHistory();
     const [form] = Form.useForm();
+
     const dispatch = useDispatch();
-    const auth = useSelector((state) => state.auth);
+
+    const registerUser = useSelector((state) => state.auth.createUser);
     // this use for server side validation
     const [formFieldsValidation, setFormFieldsValidation] = useState(initialFieldsValues);
 
-    // useEffect(() => {
-    //     if (auth.loading) {
-    //         Notification("User Registration", "");
-    //     } else {
-    //         form.resetFields();
-    //     }
-    // }, [auth.loading])
-
     useEffect(() => {
-        if (Object.entries(auth.errors).length !== 0) {
-            let temp = {...formFieldsValidation};
+        if (Object.entries(registerUser.errors).length !== 0) {
+            let temp = { ...formFieldsValidation };
 
-            for (let i = 0; i < auth.errors.length; i++) {
-                let key = auth.errors[i].param;
-                console.log('asxasxas');
+            for (let i = 0; i < registerUser.errors.length; i++) {
+                let key = registerUser.errors[i].param;
                 temp[key] = {
                     status: 'error',
-                    msg: auth.errors[i].msg
+                    msg: registerUser.errors[i].msg
                 }
             }
 
             setFormFieldsValidation(temp);
             //error notification
             //Notification("There are errors", "");
+        } else {
+            setFormFieldsValidation(initialFieldsValues);
         }
-    }, [auth.errors])
+    }, [registerUser.errors])
+
+    useEffect(() => {
+        if (Object.entries(registerUser.user).length !== 0 && registerUser.loading) {
+            history.push("/");
+            
+            form.resetFields();
+            Notification("User Successfully Registered!", `Email: ${registerUser.user.email}`)
+        }
+    }, [registerUser.user])
 
     const onFinish = (values) => {
         dispatch(createUser(values));
     };
 
     const onFinishFailed = () => {
-        alert('form failed error');
+        ErrorNotification('Fill Form Correctly')
     }
 
     const onclickee = () => {
@@ -100,12 +105,6 @@ function Signup() {
         });
     }
 
-    const onclickeeaas = () => {
-        setFormFieldsValidation({
-            ...formFieldsValidation,
-            username: { status: null, msg: null }
-        });
-    }
     return (
         <Card
             style={{ marginTop: '50px' }}
@@ -172,7 +171,7 @@ function Signup() {
                         },
                     ]}
                 >
-                    <Input onFocus={onclickeeaas} />
+                    <Input />
                 </Form.Item>
 
                 <Form.Item

@@ -1,4 +1,4 @@
-import { PRODUCTS } from '../../constants/adminActionType';
+import { PRODUCTS } from '../../constants/publicConstants';
 
 import * as api from '../../api/admin/products';
 

@@ -7,13 +7,13 @@ import { NavLink } from 'react-router-dom'
 const { Header} = Layout;
 
 function TopHeader() {
-    const auth = useSelector((state)=>state.auth);
+    const loggedInUser = useSelector((state)=>state.auth.loggedInUser);
 
     const [current, setCurrent] = useState('home');
     const menuSelectHandler = (e) => {
         setCurrent(e.key);
     }
-
+    
     return (
         <Header className="header" >
             <div className="logo" >Logo</div>
@@ -22,7 +22,7 @@ function TopHeader() {
                 <Menu.Item key="shop"><NavLink exact to="/shop">Shop</NavLink></Menu.Item>
                 
                 {
-                    (!auth.user.email)?
+                    (!loggedInUser.user.email)?
                     <>
                     <Menu.Item key="signup"><NavLink exact to="/signup">Sign Up</NavLink></Menu.Item>
                     <Menu.Item key="signin"><NavLink exact to="/signin">Signin</NavLink></Menu.Item>
